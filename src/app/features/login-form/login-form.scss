@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 400px;
+  max-width: 1000px;
+  padding: 20px;
+  gap: 20px;
+  border: 1px solid $primary-blue;
+  border-radius: $border-radius-base;
+
+  &__title {
+    color: $primary-white;
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  &__label {
+    color: $primary-light-gray;
+    font-size: .9rem;
+  }
+
+  &__input {
+    padding: .75rem 1rem;
+    background: $alt-black;
+    border: 1px solid $primary-blue;
+    border-radius: 6px;
+    color: $primary-white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .2s;
+
+    &:focus {
+      border-color: $primary-red;
+    }
+
+    &::placeholder {
+      color: $primary-light-gray;
+      opacity: .5;
+    }
+  }
+
+  &__error {
+    color: $primary-red;
+    font-size: .85rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__btn {
+    padding: .75rem;
+    background: $primary-blue;
+    color: $primary-white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity .2s;
+    font-family: $font-primary;
+
+    &:hover:not(:disabled) {
+      opacity: .85;
+    }
+
+    &:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+  }
+}

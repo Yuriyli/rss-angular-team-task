@@ -1,8 +1,17 @@
 import { Routes } from '@angular/router';
-import { Home } from '@features/home/home';
+
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    loadComponent: () => import('./pages/main-page/main-page').then((m) => m.MainPage),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login-page/login-page').then((m) => m.LoginPage),
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];
