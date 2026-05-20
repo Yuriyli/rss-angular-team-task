@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+.market-card {
+  background-color: $alt-black;
+  border: 1px solid $primary-gray;
+  border-radius: $border-radius-base;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: border-color $transition-base, transform $transition-base;
+  min-width: 160px;
+
+  &:hover {
+    border-color: $primary-blue;
+    transform: translateY(-2px);
+  }
+
+  &__symbol {
+    color: $primary-white;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    color: $primary-white;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  &__change {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+
+    &.positive {
+      color: #26c281;
+    }
+
+    &.negative {
+      color: $primary-red;
+    }
+  }
+
+  &__volume {
+    color: $primary-light-gray;
+    font-size: 0.8rem;
+  }
+}
