@@ -18,4 +18,12 @@
     color: $primary-light-gray;
     margin-top: .5rem;
   }
+
+  &__market-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
 }
