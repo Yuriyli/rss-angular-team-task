@@ -1,0 +1,8 @@
+<div class="market-card" role="button" tabindex="0" (click)="onClick()" (keydown.enter)="onClick()" (keydown.space)="onClick()">
+  <div class="market-card__symbol">{{ symbol() }}</div>
+  <div class="market-card__price">${{ price() | number:'1.2-2' }}</div>
+  <div class="market-card__change" [class.positive]="isPositiveChange()" [class.negative]="!isPositiveChange()">
+    {{ isPositiveChange() ? '+' : '' }}{{ change24h() | number:'1.2-2' }}%
+  </div>
+  <div class="market-card__volume">Vol: {{ volume() | number:'1.0-0' }}</div>
+</div>
