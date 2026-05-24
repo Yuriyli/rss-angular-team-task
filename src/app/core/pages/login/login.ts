@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { LoginCredentials } from '@features/login-form/model/login-form.interfaces';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-login',
   imports: [LoginForm],
-  templateUrl: './login-page.html',
-  styleUrl: './login-page.scss',
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
   standalone: true,
 })
-export class LoginPage {
+export class Login {
   private readonly auth: AuthService = inject(AuthService);
   private readonly router: Router = inject(Router);
 
