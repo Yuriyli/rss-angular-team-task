@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { MarketCard } from '@features/dashboard/components/market-card/market-card';
+import { MarketCard } from '@core/pages/dashboard/components/market-card/market-card';
 
 @Component({
-  selector: 'app-main-page',
+  selector: 'app-main',
   imports: [MarketCard],
-  templateUrl: './main-page.html',
-  styleUrl: './main-page.scss',
-  standalone: true
+  templateUrl: './main.html',
+  styleUrl: './main.scss',
+  standalone: true,
 })
-export class MainPage {
+export class Main {
   readonly pairs = [
     { symbol: 'BTCUSDT', price: 67420.5, change24h: 2.34, volume: 1_820_000_000 },
     { symbol: 'ETHUSDT', price: 3512.8, change24h: -1.12, volume: 940_000_000 },
