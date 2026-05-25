@@ -12,6 +12,8 @@ The platform runs on top of Binance Spot Testnet — a fully functional Binance 
 | Vladimir Solodkov | [vladimirsolo](https://github.com/vladimirsolo) |
 | Yuri li           | [yuriyli](https://github.com/yuriyli)           |
 
+### Meeting notes [link](meeting-notes)
+
 ## Development server
 
 To start a local development server, run:
