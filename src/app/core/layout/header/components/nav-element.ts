@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'app-nav-element',
   imports: [RouterLink],
   template: '<a routerLink=`route()` class="nav-element">{{text()}}</a>',
   styles: [
@@ -23,7 +23,7 @@ import { RouterLink } from '@angular/router';
     `,
   ],
 })
-export class Nav {
+export class NavElement {
   readonly text = input.required<string>();
   readonly route = input.required<string>();
 }
