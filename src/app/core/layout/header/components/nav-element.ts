@@ -9,15 +9,28 @@ import { RouterLink } from '@angular/router';
     `
       @use 'variables' as *;
 
+      :host {
+        display: flex;
+        align-items: center;
+      }
+
       .nav-element {
-        display: block;
+        display: flex;
         color: $primary-blue;
         font-size: 1.2rem;
-        padding: 0rem 1rem;
+        font-weight: 500;
+        margin: 0rem 0.3rem;
+        padding: 0.1rem 0.7rem;
         text-decoration-line: none;
+        border-radius: 0.4rem;
+        transition:
+          color $transition-base,
+          background-color $transition-fast,
+          transform $transition-fast;
 
         &:hover {
-          color: $default-button-hover-color;
+          transform: translate(1px, 1px);
+          background-color: $alt-black;
         }
       }
     `,
