@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-nav-element',
   imports: [RouterLink],
-  template: '<a routerLink=`route()` class="nav-element">{{text()}}</a>',
+  template: '<a [routerLink]="route()" class="nav-element">{{text()}}</a>',
   styles: [
     `
       @use 'variables' as *;
