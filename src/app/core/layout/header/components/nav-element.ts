@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-nav-element',
-  imports: [RouterLink],
-  template: '<a [routerLink]="route()" class="nav-element">{{text()}}</a>',
+  imports: [RouterLink, RouterLinkActive],
+  template:
+    '<a [routerLink]="route()" class="nav-element" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{text()}}</a>',
   styles: [
     `
       @use 'variables' as *;
@@ -24,13 +25,18 @@ import { RouterLink } from '@angular/router';
         text-decoration-line: none;
         border-radius: 0.4rem;
         transition:
-          color $transition-base,
+          color $transition-fast,
           background-color $transition-fast,
           transform $transition-fast;
 
-        &:hover {
+        &:not(.active):hover {
           transform: translate(1px, 1px);
           background-color: $alt-black;
+        }
+
+        &.active {
+          color: $alt-blue;
+          cursor: default;
         }
       }
     `,
