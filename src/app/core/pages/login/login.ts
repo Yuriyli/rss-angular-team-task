@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { LoginForm } from '@features/login-form/login-form';
-import { AuthService } from '@core/services/AuthService';
+import { AuthService } from '@core/services/auth/auth-service';
 import { Router } from '@angular/router';
-import { LoginCredentials } from '@features/login-form/model/login-form.interfaces';
+import { LoginRequest } from '@core/services/auth/auth-service.interfaces';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +15,14 @@ export class Login {
   private readonly auth: AuthService = inject(AuthService);
   private readonly router: Router = inject(Router);
 
-  protected onSubmit(credentials: LoginCredentials): void {
-    const success: boolean = this.auth.login(credentials.username, credentials.password);
-    if (success) this.router.navigate(['/']);
-    else console.log('add error');
+  protected onSubmit(input: LoginRequest): void {
+    this.auth.login({ email: input.email, password: input.password }).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (error: unknown) => {
+        console.error(error);
+      },
+    });
   }
 }

@@ -2,8 +2,8 @@
   <h2 class="login-form__title">{{ title() }}</h2>
 
   <div class="login-form__field">
-    <label class="login-form__label" for="username">Username</label>
-    <input class="login-form__input" id="username" type="text" placeholder="Enter username" [(ngModel)]="username" />
+    <label class="login-form__label" for="email">Email</label>
+    <input class="login-form__input" id="email" type="text" placeholder="Enter email" [(ngModel)]="email" />
   </div>
 
   <div class="login-form__field">
@@ -11,6 +11,6 @@
     <input class="login-form__input" id="password" type="password" placeholder="Enter password" [(ngModel)]="password" />
   </div>
 
-  <button class="login-form__btn" [disabled]="!username || !password" (click)="onSubmit()">{{ submitLabel() }}
+  <button class="login-form__btn" [disabled]="!email || !password" (click)="onSubmit()">{{ submitLabel() }}
   </button>
 </div>
