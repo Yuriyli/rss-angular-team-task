@@ -8,6 +8,7 @@ import {
   UserDetails,
 } from '@core/services/auth/auth-service.interfaces';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -22,10 +23,14 @@ export class AuthService {
   readonly isLoggedIn: Signal<boolean> = this.loggedIn.asReadonly();
   readonly user: Signal<UserDetails | null> = this.currentUser.asReadonly();
 
-  private readonly backendUrl = 'http://localhost:3000';
+  private readonly backendUrl = environment.backendUrl;
   private readonly loginPath = '/auth/login';
   private readonly registrationPath = '/auth/registration';
   private readonly accessToken = 'access-token';
+
+  constructor() {
+    if (localStorage.getItem('access-token')) this.loggedIn.set(true);
+  }
 
   login(input: LoginRequest): Observable<AuthResponse> {
     return this.httpClient.post<AuthResponse>(this.backendUrl + this.loginPath, input).pipe(
