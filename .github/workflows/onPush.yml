@@ -1,0 +1,93 @@
+name: On Push
+on: push
+jobs:
+  check_cache:
+    name: Cache check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v6
+        
+      - name: Checkout cache
+        id: cache_check
+        uses: actions/cache/restore@v5
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ hashFiles('package-lock.json') }}
+          lookup-only: true
+          
+      - name: Skip new cache
+        if: steps.cache_check.outputs.cache-hit == 'true'
+        run: echo "Skip creating new cache"
+        
+      - name: Install dependencies
+        if: steps.cache_check.outputs.cache-hit != 'true'
+        run: npm ci  
+        
+      - uses: actions/cache/save@v5
+        if: steps.cache_check.outputs.cache-hit != 'true'
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ hashFiles('package-lock.json') }}
+          
+  linter:
+    name: Running linter
+    needs: check_cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        
+      - uses: actions/cache/restore@v5
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ hashFiles('package-lock.json') }}
+          
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+        
+      - name: Run linting
+        run: ng lint
+        
+  tests:
+    name: Running tests
+    needs: check_cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        
+      - uses: actions/cache/restore@v5
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ hashFiles('package-lock.json') }}
+          
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+        
+      - name: Run tests
+        run: ng test --no-watch
+        
+  build:
+    name: Running build
+    needs: check_cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        
+      - uses: actions/cache/restore@v5
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ hashFiles('package-lock.json') }}
+          
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+        
+      - name: Build
+        run: ng build
