@@ -1,5 +1,6 @@
 <div class="login">
   <div class="login__card">
-    <app-login-form title="Welcome" submitLabel="Enter" (submitted)="onSubmit($event)" />
+    <app-login-form title="Welcome back" submitLabel="Login" [isLoading]="isLoading()"
+                    [errorMessage]="errorMessage()" (submitted)="onSubmit($event)" />
   </div>
 </div>
