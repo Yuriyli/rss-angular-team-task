@@ -4,6 +4,9 @@ A trading app (educational project for RS School / Angular Course) where the use
 
 The platform runs on top of Binance Spot Testnet — a fully functional Binance test environment that provides virtual funds upon registration. All data is virtual — no real money is involved.
 
+## Deploy
+https://rss-angular-crypto.vercel.app/
+
 ## Participants
 
 | Name              | Github                                          |
