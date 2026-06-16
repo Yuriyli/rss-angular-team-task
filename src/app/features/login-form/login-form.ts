@@ -1,31 +1,32 @@
-import { Component, input, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { LoginCredentials } from '@features/login-form/model/login-form.interfaces';
+import { Component, inject, input, output } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginRequest } from '@core/services/auth/auth-service.interfaces';
 
 @Component({
   selector: 'app-login-form',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login-form.html',
   styleUrl: './login-form.scss',
-  standalone: true
+  standalone: true,
 })
 export class LoginForm {
+  private readonly fb = inject(FormBuilder);
 
   title = input<string>('Sign In');
   submitLabel = input<string>('Login');
   errorMessage = input<string>('');
-  
-  submitted = output<LoginCredentials>();
+  isLoading = input<boolean>(false);
 
-  protected username = '';
-  protected password = '';
+  submitted = output<LoginRequest>();
+
+  protected form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
   protected onSubmit(): void {
-    if (!this.username || !this.password) return;
-
-    this.submitted.emit({
-      username: this.username,
-      password: this.password
-    });
+    if (this.form.invalid || this.isLoading()) return;
+    const { email, password } = this.form.getRawValue();
+    this.submitted.emit({ email: email!, password: password! });
   }
 }

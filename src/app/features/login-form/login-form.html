@@ -1,16 +1,30 @@
-<div class="login-form">
+<form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2 class="login-form__title">{{ title() }}</h2>
 
   <div class="login-form__field">
-    <label class="login-form__label" for="username">Username</label>
-    <input class="login-form__input" id="username" type="text" placeholder="Enter username" [(ngModel)]="username" />
+    <label class="login-form__label" for="email">Email</label>
+    <input class="login-form__input" id="email" type="text" placeholder="Enter email" formControlName="email" />
+    @if (form.controls.email.invalid && form.controls.email.dirty) {
+      <span class="login-form__error">Invalid email</span>
+    }
   </div>
 
   <div class="login-form__field">
     <label class="login-form__label" for="password">Password</label>
-    <input class="login-form__input" id="password" type="password" placeholder="Enter password" [(ngModel)]="password" />
+    <input class="login-form__input" id="password" type="password" placeholder="Enter password"
+           formControlName="password" />
+    @if (form.controls.password.invalid && form.controls.email.dirty) {
+      <span class="login-form__error">Minimum 6 characters</span>
+    }
   </div>
+  @if (errorMessage()) {
+    <p class="login-form__error">{{ errorMessage() }}</p>
+  }
 
-  <button class="login-form__btn" [disabled]="!username || !password" (click)="onSubmit()">{{ submitLabel() }}
+  <button class="login-form__btn" type="submit" [disabled]="form.invalid || isLoading()">@if (isLoading()) {
+    Signing in...
+  } @else {
+    {{ submitLabel() }}
+  }
   </button>
-</div>
+</form>
